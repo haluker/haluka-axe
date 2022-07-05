@@ -3,6 +3,7 @@ process.env.NODE_ENV = 'cli'
 const fs = require('fs')
 const ignite = require('haluka-ignite').Ignite
 const dotenv = require('dotenv')
+const randomstring = require('randomstring')
 
 exports.preHooks = async () => {
     process.env.ENV_PATH = '.env'
@@ -37,7 +38,7 @@ exports['create-env'] = async ({ prompt }) => {
         let questions = Object.keys(config).map(x => { return { name: x, default: config[x] } })
         try {
             let answers = await prompt(questions)
-            answers['APP_KEY'] = app('Encryption').generateKey('aes-256-cbc')
+            answers['APP_KEY'] = randomstring.generate(64)
             let envData = Object.keys(answers).map(x => x + '=' + answers[x]).join('\n')
             fs.writeFileSync('.env', envData)
         } catch (error) {
