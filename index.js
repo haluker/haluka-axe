@@ -7,7 +7,6 @@ const dotenv = require('dotenv')
 exports.preHooks = async () => {
     process.env.ENV_PATH = '.env'
 
-
     let _default = {
         prettyBoot: false,
         bootMessage: false,
@@ -34,7 +33,7 @@ exports['create-env'] = async ({ prompt }) => {
         console.log('creating env from existing example file...')
         const config = dotenv.parse(Buffer.from(fs.readFileSync('.env.example')))
         delete config['APP_KEY']
-        
+
         let questions = Object.keys(config).map(x => { return { name: x, default: config[x] } })
         try {
             let answers = await prompt(questions)
