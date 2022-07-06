@@ -56,29 +56,15 @@ exports.make = async ({ prompt }) => {
                 type: 'list',
                 name: 'type',
                 message: 'Select a file to make',
-                choices: ['Controller', 'Model', 'Resource', 'RouteModelBind', 'FormModelBind']
+                choices: ['Controller', 'Model', 'Resource']
             },
             {
                 name: 'name',
                 message: 'Name',
-                when: (ans) => {
-                    return !['RouteModelBind', 'FormModelBind'].includes(ans.type)
-                },
 				validate: (ans) => {
 					// return fs.existsSync()
 					return true
 				}
-            },
-            {
-                name: 'model',
-                message: 'Model to bind with',
-                choices: fs.existsSync(app().modelPath()) ? fs.readdirSync(app().modelPath()) : [],
-                when: (ans) => {
-                    return ['RouteModelBind', 'FormModelBind'].includes(ans.type)
-                },
-                validate: (ans) => {
-                    return ans !== ''
-                }
             }
         ])
         

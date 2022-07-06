@@ -1,6 +1,6 @@
 {
   "name": "haluka-axe",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Haluka CLI Commands Toolkit",
   "main": "index.js",
   "scripts": {
