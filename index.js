@@ -18,6 +18,11 @@ exports.preHooks = async () => {
     let opts = Object.assign(_default, localOpts)
     await ignite(opts)
 }
+
+exports.postHooks = async () => {
+    await app().terminate()
+}
+
 exports.assets = ({ params }) => {
     require('haluka-sass').default({
         source: './resources/scss',
